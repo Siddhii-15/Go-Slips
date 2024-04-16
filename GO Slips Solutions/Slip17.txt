@@ -1,0 +1,60 @@
+Q.1(A)
+
+package main
+
+import "fmt"
+
+// Function to perform arithmetic operations and return multiple values
+func arithmeticOperations(a, b float64) (float64, float64, float64, float64) {
+	addition := a + b
+	subtraction := a - b
+	multiplication := a * b
+	division := a / b
+	return addition, subtraction, multiplication, division
+}
+
+func main() {
+	// Input numbers
+	num1 := 10.0
+	num2 := 5.0
+
+	// Perform arithmetic operations and receive multiple return values
+	sum, difference, product, quotient := arithmeticOperations(num1, num2)
+
+	// Print the results
+	fmt.Println("Addition:", sum)
+	fmt.Println("Subtraction:", difference)
+	fmt.Println("Multiplication:", product)
+	fmt.Println("Division:", quotient)
+}
+----------------------------------------------------------------------------------------
+Q.1(B)
+
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// Open the file in append mode, create if not exists
+	file, err := os.OpenFile("example.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	defer file.Close()
+
+	// Content to append to the file
+	content := "This is the new content.\n"
+
+	// Write content to the end of the file
+	_, err = file.WriteString(content)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Println("Content appended successfully.")
+}

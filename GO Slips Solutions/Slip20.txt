@@ -1,0 +1,83 @@
+Q.1 (B)
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	// Create a channel of type int
+	ch := make(chan int)
+
+	// Sender goroutine: Sends integers to the channel
+	go func() {
+		for i := 0; i < 5; i++ {
+			ch <- i
+		}
+		// Close the channel after sending all values
+		close(ch)
+	}()
+
+	// Receiver goroutine: Reads integers from the channel using a for range loop
+	for num := range ch {
+		fmt.Println("Received:", num)
+	}
+
+	// After the channel is closed, the loop terminates automatically
+	fmt.Println("Channel closed")
+
+	// Example of closing the channel explicitly
+	ch2 := make(chan string)
+
+	// Sender goroutine: Sends strings to the channel
+	go func() {
+		ch2 <- "Hello"
+		ch2 <- "World"
+		// Close the channel explicitly
+		close(ch2)
+	}()
+
+	// Receiver goroutine: Reads strings from the channel using a for range loop
+	for msg := range ch2 {
+		fmt.Println("Received:", msg)
+	}
+
+	// After the channel is closed, the loop terminates automatically
+	fmt.Println("Channel closed explicitly")
+}
+
+
+-----------------------------------------------------
+Q.1 (A)
+
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// Open the file in append mode, create if not exists
+	file, err := os.OpenFile("example.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	defer file.Close()
+
+	// Content to append to the file
+	content := "This is the new content.\n"
+
+	// Write content to the end of the file
+	_, err = file.WriteString(content)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Println("Content appended successfully.")
+}
+--------------------------------------
+make a example.txt filw to run this program

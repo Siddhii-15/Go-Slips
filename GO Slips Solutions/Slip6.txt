@@ -1,0 +1,76 @@
+Q.1
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	// Define two matrices
+	matrix1 := [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}
+	matrix2 := [][]int{{9, 8, 7}, {6, 5, 4}, {3, 2, 1}}
+
+	// Get dimensions of matrices
+	rows1 := len(matrix1)
+	cols1 := len(matrix1[0])
+	rows2 := len(matrix2)
+	cols2 := len(matrix2[0])
+
+	// Check if multiplication is possible
+	if cols1 != rows2 {
+		fmt.Println("Multiplication is not possible: Number of columns of first matrix must equal the number of rows of the second matrix")
+		return
+	}
+
+	// Initialize the result matrix with zeros
+	result := make([][]int, rows1)
+	for i := range result {
+		result[i] = make([]int, cols2)
+	}
+
+	// Perform matrix multiplication
+	for i := 0; i < rows1; i++ {
+		for j := 0; j < cols2; j++ {
+			for k := 0; k < cols1; k++ {
+				result[i][j] += matrix1[i][k] * matrix2[k][j]
+			}
+		}
+	}
+
+	// Display the result
+	fmt.Println("Matrix multiplication result:")
+	for _, row := range result {
+		fmt.Println(row)
+	}
+}
+==============================================
+
+Q.1 (B)
+
+ package main
+
+import (
+	"fmt"
+)
+
+// copyArray copies all elements from source array to destination array
+func copyArray(source []int, destination []int) {
+	for i, val := range source {
+		destination[i] = val
+	}
+}
+
+func main() {
+	// Define source array
+	source := []int{1, 2, 3, 4, 5}
+
+	// Define destination array with the same length as source
+	destination := make([]int, len(source))
+
+	// Copy elements from source to destination
+	copyArray(source, destination)
+
+	// Display the contents of the destination array
+	fmt.Println("Destination array after copying:", destination)
+}

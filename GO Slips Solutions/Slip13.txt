@@ -1,0 +1,44 @@
+------------------------------SLIP  13----------------------------------
+
+Q1-------------
+package main
+import "fmt"
+func main() {
+	evenSum, oddSum := 0, 0
+	// Calculate sum of even and odd numbers separately
+	for i := 1; i <= 100; i++ {
+		if i%2 == 0 {
+			evenSum += i
+		} else {
+			oddSum += i
+		}
+	}
+	// Print sum of even and odd numbers
+	fmt.Println("Sum of even numbers between 1 to 100:", evenSum)
+	fmt.Println("Sum of odd numbers between 1 to 100:", oddSum)
+}
+
+
+
+--------------------QB----------------
+
+package main
+import (
+	"fmt"
+	"testing"
+)
+// Square returns the square of a given number
+func Square(x int) int {
+	return x * x
+}
+func BenchmarkSquare(b *testing.B) {
+	// Benchmark the Square function
+	for i := 0; i < b.N; i++ {
+		Square(10) // Change the argument as needed
+	}
+}
+func main() {
+	// Test the Square function
+	num := 5
+	fmt.Printf("Square of %d is: %d\n", num, Square(num))
+}

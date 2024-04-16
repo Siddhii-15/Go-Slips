@@ -1,0 +1,43 @@
+-------------------------------SLIP 11-------------------------
+
+Q1
+
+package main
+import "fmt"
+func main() {
+	var num int
+	fmt.Println("Enter a number:")
+	fmt.Scanln(&num)
+	if num >= 10 && num <= 99 {
+		fmt.Println("The entered number is a two-digit number.")
+	} else {
+		fmt.Println("The entered number is not a two-digit number.")
+	}
+}
+
+
+-------------------QB------------------
+
+package main
+import "fmt"
+func main() {
+	// Create a buffered channel with a capacity of 3
+	ch := make(chan int, 3)
+	// Store values in the channel
+	ch <- 10
+	ch <- 20
+	ch <- 30
+	// Find the channel capacity and length
+	capacity := cap(ch)
+	length := len(ch)
+	fmt.Println("Initial Channel Capacity:", capacity)
+	fmt.Println("Initial Channel Length:", length)
+	// Read values from the channel
+	for i := 0; i < length; i++ {
+		value := <-ch
+		fmt.Println("Read value from channel:", value)
+	}
+	// Find the modified length of the channel
+	length = len(ch)
+	fmt.Println("Modified Channel Length:", length)
+}

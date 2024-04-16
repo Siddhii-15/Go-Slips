@@ -1,0 +1,53 @@
+Q.1. (A)
+
+package main
+
+import "fmt"
+
+// Function to perform addition and subtraction and return multiple values
+func addAndSubtract(a, b float64) (float64, float64) {
+	addition := a + b
+	subtraction := a - b
+	return addition, subtraction
+}
+
+func main() {
+	// Input numbers
+	num1 := 10.0
+	num2 := 5.0
+
+	// Perform addition and subtraction and receive multiple return values
+	sum, difference := addAndSubtract(num1, num2)
+
+	// Print the results
+	fmt.Println("Addition:", sum)
+	fmt.Println("Subtraction:", difference)
+}
+
+
+--------------------
+Q.1 (B)
+
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// Open the file in READ-only mode
+	file, err := os.Open("example.txt")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	defer file.Close()
+
+	// Print confirmation message
+	fmt.Println("File opened successfully in READ-only mode.")
+
+	// Perform read operations on the file here...
+}
+------------------------------------
+Make one example.txt file to run this program

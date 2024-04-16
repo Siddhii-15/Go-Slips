@@ -1,0 +1,97 @@
+-------------------------------SLIP 11-------------------------
+
+Q1
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	// Creating a slice
+	slice := []int{1, 2, 3, 4, 5}
+
+	// Displaying the original slice
+	fmt.Println("Original Slice:", slice)
+
+	// Appending elements to the slice
+	slice = append(slice, 6, 7)
+	fmt.Println("Slice after appending elements:", slice)
+
+	// Removing an element from the slice by index
+	indexToRemove := 2
+	slice = removeElement(slice, indexToRemove)
+	fmt.Println("Slice after removing element at index", indexToRemove, ":", slice)
+
+	// Copying a slice
+	copiedSlice := make([]int, len(slice))
+	copy(copiedSlice, slice)
+	fmt.Println("Copied Slice:", copiedSlice)
+}
+
+// Function to remove an element from a slice by index
+func removeElement(slice []int, index int) []int {
+	return append(slice[:index], slice[index+1:]...)
+}
+
+
+-------------------QB------------------
+
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	// Input number
+	number := 123
+
+	// Create channels to receive results
+	squaresCh := make(chan int)
+	cubesCh := make(chan int)
+
+	// Calculate squares and cubes concurrently
+	go calculateSquares(number, squaresCh)
+	go calculateCubes(number, cubesCh)
+
+	// Receive results from channels
+	squaresSum := <-squaresCh
+	cubesSum := <-cubesCh
+
+	// Print the sums
+	fmt.Println("Sum of squares:", squaresSum)
+	fmt.Println("Sum of cubes:", cubesSum)
+}
+
+// Function to calculate the sum of squares of individual digits
+func calculateSquares(number int, ch chan<- int) {
+	digits := extractDigits(number)
+	sum := 0
+	for _, digit := range digits {
+		sum += digit * digit
+	}
+	ch <- sum
+}
+
+// Function to calculate the sum of cubes of individual digits
+func calculateCubes(number int, ch chan<- int) {
+	digits := extractDigits(number)
+	sum := 0
+	for _, digit := range digits {
+		sum += digit * digit * digit
+	}
+	ch <- sum
+}
+
+// Function to extract digits from a number and return them as a slice
+func extractDigits(number int) []int {
+	strNumber := strconv.Itoa(number)
+	digits := make([]int, len(strNumber))
+	for i, char := range strNumber {
+		digit, _ := strconv.Atoi(string(char))
+		digits[i] = digit
+	}
+	return digits
+}

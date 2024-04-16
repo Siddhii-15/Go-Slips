@@ -1,0 +1,54 @@
+-------------------------SLIP  12-------------------------------
+
+Q1-------------------
+package main
+import "fmt"
+func swap(x *int, y *int) {
+	temp := *x
+	*x = *y
+	*y = temp
+}
+func main() {
+	num1 := 10
+	num2 := 20
+	fmt.Println("Before swapping:")
+	fmt.Println("num1:", num1)
+	fmt.Println("num2:", num2)
+	swap(&num1, &num2)
+	fmt.Println("\nAfter swapping:")
+	fmt.Println("num1:", num1)
+	fmt.Println("num2:", num2)
+}
+
+------------------------------------QB--------------------
+package main
+import "fmt"
+func main() {
+	var intSlice = []int{91, 42, 23, 14, 15, 76, 87, 28, 19, 95}
+	chOdd := make(chan int)
+	chEven := make(chan int)
+
+	go odd(chOdd)
+	go even(chEven)
+	for _, value := range intSlice {
+		if value%2 != 0 {
+			chOdd <- value
+		} else {
+			chEven <- value
+		}
+	}
+}
+func odd(ch <-chan int) {
+	for v := range ch {
+		fmt.Println("ODD :", v)
+	}
+}
+func even(ch <-chan int) {
+	for v := range ch {
+		fmt.Println("EVEN:", v)
+	}
+}
+
+
+
+

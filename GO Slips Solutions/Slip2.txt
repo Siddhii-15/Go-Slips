@@ -1,0 +1,30 @@
+Q.1
+A)
+package main
+import "fmt"
+func fibonacci(n int) []int {
+    fib := make([]int, n)
+    fib[0], fib[1] = 0, 1
+    for i := 2; i < n; i++ {
+        fib[i] = fib[i-1] + fib[i-2]
+    }
+    return fib
+}
+func main() {
+    var n int
+    fmt.Println("Enter the number of terms in Fibonacci series:")
+    fmt.Scanln(&n)
+    if n <= 0 {
+        fmt.Println("Please enter a positive number.")
+        return
+    }
+    fibSeries := fibonacci(n)
+    fmt.Printf("Fibonacci series of %d terms: ", n)
+    for _, num := range fibSeries {
+        fmt.Printf("%d ", num)
+    }
+    fmt.Println()
+}
+-------------------------------------------------------------------------------------------------------------
+B)
+

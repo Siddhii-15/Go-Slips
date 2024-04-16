@@ -1,0 +1,86 @@
+Q.1
+
+package main
+
+import "fmt"
+
+func main() {
+	// Define the matrix
+	matrix := [][]int{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9},
+	}
+
+	// Display the original matrix
+	fmt.Println("Original Matrix:")
+	displayMatrix(matrix)
+
+	// Calculate the transpose of the matrix
+	transpose := transposeMatrix(matrix)
+
+	// Display the transpose matrix
+	fmt.Println("\nTranspose Matrix:")
+	displayMatrix(transpose)
+}
+
+// transposeMatrix calculates the transpose of a given matrix
+func transposeMatrix(matrix [][]int) [][]int {
+	rows := len(matrix)
+	cols := len(matrix[0])
+
+	// Initialize the transpose matrix
+	transpose := make([][]int, cols)
+	for i := range transpose {
+		transpose[i] = make([]int, rows)
+	}
+
+	// Populate the transpose matrix
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
+			transpose[j][i] = matrix[i][j]
+		}
+	}
+
+	return transpose
+}
+
+// displayMatrix displays the given matrix
+func displayMatrix(matrix [][]int) {
+	for _, row := range matrix {
+		fmt.Println(row)
+	}
+}
+===================================================
+
+Q.1 (B)
+
+package main
+
+import "fmt"
+
+// Define structure Student
+type Student struct {
+	ID   int
+	Name string
+	Age  int
+}
+
+// Method show() with a receiver of type pointer to Student
+func (s *Student) show() {
+	fmt.Println("Student Details:")
+	fmt.Println("ID:", s.ID)
+	fmt.Println("Name:", s.Name)
+	fmt.Println("Age:", s.Age)
+}
+
+func main() {
+	// Create a student object
+	student := Student{ID: 1, Name: "John Doe", Age: 20}
+
+	// Call the show() method using a pointer to the student object
+	(&student).show() // The receiver type is a pointer, so it's automatically dereferenced
+
+	// Alternatively, Go allows using the method with a pointer directly, without explicitly taking the address
+	student.show() // Go automatically takes the address of student and passes it as the receiver
+}

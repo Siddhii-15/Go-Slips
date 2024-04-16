@@ -1,0 +1,115 @@
+Q.1 (A)
+package main
+
+import "fmt"
+
+// Book structure to hold book details
+type Book struct {
+	BookID int
+	Title  string
+	Author string
+	Price  float64
+}
+
+func main() {
+	var numBooks int
+
+	// Accept the number of books from the user
+	fmt.Print("Enter the number of books: ")
+	fmt.Scanln(&numBooks)
+
+	// Create a slice to store book details
+	books := make([]Book, numBooks)
+
+	// Accept book details from the user
+	for i := 0; i < numBooks; i++ {
+		var book Book
+		fmt.Printf("\nEnter details for Book %d:\n", i+1)
+		fmt.Print("BookID: ")
+		fmt.Scanln(&book.BookID)
+		fmt.Print("Title: ")
+		fmt.Scanln(&book.Title)
+		fmt.Print("Author: ")
+		fmt.Scanln(&book.Author)
+		fmt.Print("Price: ")
+		fmt.Scanln(&book.Price)
+
+		books[i] = book
+	}
+
+	// Display book details
+	fmt.Println("\nBook Details:")
+	for i, book := range books {
+		fmt.Printf("Book %d:\n", i+1)
+		fmt.Println("BookID:", book.BookID)
+		fmt.Println("Title:", book.Title)
+		fmt.Println("Author:", book.Author)
+		fmt.Println("Price:", book.Price)
+		fmt.Println()
+	}
+}
+
+============================================================
+Q.1 (B)
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// Shape interface with Area() and Perimeter() methods
+type Shape interface {
+	Area() float64
+	Perimeter() float64
+}
+
+// Circle type with radius
+type Circle struct {
+	Radius float64
+}
+
+// Rectangle type with length and width
+type Rectangle struct {
+	Length float64
+	Width  float64
+}
+
+// Area method for Circle
+func (c *Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
+}
+
+// Perimeter method for Circle
+func (c *Circle) Perimeter() float64 {
+	return 2 * math.Pi * c.Radius
+}
+
+// Area method for Rectangle
+func (r *Rectangle) Area() float64 {
+	return r.Length * r.Width
+}
+
+// Perimeter method for Rectangle
+func (r *Rectangle) Perimeter() float64 {
+	return 2 * (r.Length + r.Width)
+}
+
+func main() {
+	// Create a circle with radius 5
+	circle := &Circle{Radius: 5}
+
+	// Create a rectangle with length 4 and width 6
+	rectangle := &Rectangle{Length: 4, Width: 6}
+
+	// Calculate and display area and perimeter for circle
+	fmt.Println("Circle:")
+	fmt.Printf("Area: %.2f\n", circle.Area())
+	fmt.Printf("Perimeter: %.2f\n", circle.Perimeter())
+
+	// Calculate and display area and perimeter for rectangle
+	fmt.Println("\nRectangle:")
+	fmt.Printf("Area: %.2f\n", rectangle.Area())
+	fmt.Printf("Perimeter: %.2f\n", rectangle.Perimeter())
+}

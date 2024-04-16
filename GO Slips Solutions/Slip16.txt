@@ -1,0 +1,31 @@
+Q.1 (B)
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	// Create a channel to signal completion of printing
+	done := make(chan bool)
+
+	// Print numbers from 0 to 10 with delay
+	for i := 0; i <= 10; i++ {
+		go printNumberWithDelay(i, done)
+		time.Sleep(250 * time.Millisecond) // Introduce delay
+	}
+
+	// Wait for all goroutines to finish
+	for i := 0; i <= 10; i++ {
+		<-done
+	}
+}
+
+// Function to print a number with delay
+func printNumberWithDelay(num int, done chan<- bool) {
+	fmt.Println(num)
+	time.Sleep(250 * time.Millisecond) // Introduce delay
+	done <- true // Signal completion
+}

@@ -1,0 +1,106 @@
+Q.1 (A)
+
+package main
+
+import (
+	"fmt"
+)
+
+// Function to check if a number is palindrome
+func isPalindrome(num int) bool {
+	reversed := 0
+	original := num
+
+	// Reverse the number
+	for num > 0 {
+		remainder := num % 10
+		reversed = reversed*10 + remainder
+		num /= 10
+	}
+
+	// Check if the reversed number is equal to the original number
+	if original == reversed {
+		return true
+	}
+	return false
+}
+
+func main() {
+	var num int
+
+	// Accept the number from the user
+	fmt.Print("Enter a number: ")
+	fmt.Scanln(&num)
+
+	// Check if the number is palindrome
+	if isPalindrome(num) {
+		fmt.Println(num, "is a palindrome")
+	} else {
+		fmt.Println(num, "is not a palindrome")
+	}
+}
+
+============================================
+
+Q.1 (B)
+
+package main
+
+import (
+	"fmt"
+)
+
+// Shape interface with Area() and Volume() methods
+type Shape interface {
+	Area() float64
+	Volume() float64
+}
+
+// Square type with side length
+type Square struct {
+	SideLength float64
+}
+
+// Rectangle type with length and width
+type Rectangle struct {
+	Length float64
+	Width  float64
+}
+
+// Area method for Square
+func (s *Square) Area() float64 {
+	return s.SideLength * s.SideLength
+}
+
+// Volume method for Square (not applicable, returns 0)
+func (s *Square) Volume() float64 {
+	return 0
+}
+
+// Area method for Rectangle
+func (r *Rectangle) Area() float64 {
+	return r.Length * r.Width
+}
+
+// Volume method for Rectangle (not applicable, returns 0)
+func (r *Rectangle) Volume() float64 {
+	return 0
+}
+
+func main() {
+	// Create a square with side length 5
+	square := &Square{SideLength: 5}
+
+	// Create a rectangle with length 4 and width 6
+	rectangle := &Rectangle{Length: 4, Width: 6}
+
+	// Calculate and display area for square
+	fmt.Println("Square:")
+	fmt.Printf("Area: %.2f\n", square.Area())
+	fmt.Printf("Volume: %.2f\n", square.Volume())
+
+	// Calculate and display area for rectangle
+	fmt.Println("\nRectangle:")
+	fmt.Printf("Area: %.2f\n", rectangle.Area())
+	fmt.Printf("Volume: %.2f\n", rectangle.Volume())
+}

@@ -1,0 +1,78 @@
+----------------------------SLIP  15------------------
+
+QA---
+
+package main
+
+import "fmt"
+
+// Function to return sum and difference of two integers
+func calculateSumAndDifference(a, b int) (int, int) {
+	sum := a + b
+	difference := a - b
+	return sum, difference
+}
+
+func main() {
+	// Calling the function and receiving multiple return values
+	sum, difference := calculateSumAndDifference(10, 5)
+
+	// Printing the results
+	fmt.Println("Sum:", sum)
+	fmt.Println("Difference:", difference)
+}
+
+
+
+---------------QB-----------
+
+package main
+
+import (
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
+	"os"
+)
+
+// Define a struct to represent the XML data
+type Person struct {
+	XMLName xml.Name `xml:"person"`
+	Name    string   `xml:"name"`
+	Age     int      `xml:"age"`
+	City    string   `xml:"city"`
+}
+
+func main() {
+	// Open the XML file
+	xmlFile, err := os.Open("data.xml")
+	if err != nil {
+		fmt.Println("Error opening XML file:", err)
+		return
+	}
+	defer xmlFile.Close()
+
+	// Read the XML file into a byte slice
+	byteValue, err := ioutil.ReadAll(xmlFile)
+	if err != nil {
+		fmt.Println("Error reading XML file:", err)
+		return
+	}
+
+	// Define a variable of type Person to store the unmarshaled XML data
+	var person Person
+
+	// Unmarshal the XML byte slice into the Person struct
+	err = xml.Unmarshal(byteValue, &person)
+	if err != nil {
+		fmt.Println("Error unmarshaling XML:", err)
+		return
+	}
+
+	// Display the structure
+	fmt.Println("Name:", person.Name)
+	fmt.Println("Age:", person.Age)
+	fmt.Println("City:", person.City)
+}
+
+

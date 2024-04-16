@@ -1,0 +1,56 @@
+Q.1
+A)
+package main
+import (
+    "fmt"
+)
+func isPalindrome(num int) bool {
+    original := num
+    reversed := 0
+    for num > 0 {
+        remainder := num % 10
+        reversed = reversed*10 + remainder
+        num /= 10
+    }
+    return original == reversed
+}
+func main() {
+    var number int
+    fmt.Println("Enter a number to check if it's a palindrome:")
+    fmt.Scanln(&number)
+    if isPalindrome(number) {
+        fmt.Println("The number is a palindrome.")
+    } else {
+        fmt.Println("The number is not a palindrome.")
+    }
+}
+
+-------------------------------------------------------------------------------------------
+B)
+package main
+import "fmt"
+type Employee struct {
+    Eno    int
+    Ename  string
+    Salary float64 }
+func main() {
+    var n int
+    fmt.Println("Enter the number of employees:")
+    fmt.Scanln(&n)
+    employees := make([]Employee, n)
+    maxSalary := 0.0
+    for i := 0; i < n; i++ {
+        fmt.Printf("\nEnter details for employee %d:\n", i+1)
+        fmt.Println("Employee number:")
+        fmt.Scanln(&employees[i].Eno)
+        fmt.Println("Employee name:")
+        fmt.Scanln(&employees[i].Ename)
+        fmt.Println("Salary:")
+        fmt.Scanln(&employees[i].Salary)
+        if employees[i].Salary > maxSalary {
+            maxSalary = employees[i].Salary }
+    }
+    fmt.Println("\nEmployee(s) with maximum salary:")
+    for _, emp := range employees {
+        if emp.Salary == maxSalary {
+            fmt.Printf("Employee number: %d, Name: %s, Salary: %.2f\n", emp.Eno, emp.Ename, emp.Salary)   }    }   }

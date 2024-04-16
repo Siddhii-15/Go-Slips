@@ -1,0 +1,38 @@
+Q.1
+B)
+package main 
+import "fmt"
+type Employee struct {
+	Eno    int
+	Ename  string
+	Salary float64
+}
+func main() {
+	var n int
+	fmt.Println("Enter the number of employees:")
+	fmt.Scanln(&n)
+	employees := make([]Employee, n)
+	minSalary := float64(0)
+	// Accepting employee information
+	for i := 0; i < n; i++ {
+		fmt.Printf("\nEnter details for employee %d:\n", i+1)
+		fmt.Println("Employee number:")
+		fmt.Scanln(&employees[i].Eno)
+		fmt.Println("Employee name:")
+		fmt.Scanln(&employees[i].Ename)
+		fmt.Println("Salary:")
+		fmt.Scanln(&employees[i].Salary)
+		// Initialize minSalary with the first employee's salary
+		if i == 0 || employees[i].Salary < minSalary {
+			minSalary = employees[i].Salary
+		}
+	}
+	// Displaying records of employees with minimum salary
+	fmt.Println("\nEmployee(s) with minimum salary:")
+	for _, emp := range employees {
+		if emp.Salary == minSalary {
+			fmt.Printf("Employee number: %d, Name: %s, Salary: %.2f\n", emp.Eno, emp.Ename, emp.Salary)
+		}
+	} }
+
+--------------------------------------------------------------------------------------------------------------

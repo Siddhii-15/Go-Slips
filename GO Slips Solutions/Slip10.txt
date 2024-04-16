@@ -1,0 +1,89 @@
+Q.1 (A)
+
+package main
+
+import "fmt"
+
+// Shape interface
+type Shape interface {
+	Area() float64
+}
+
+// Circle type
+type Circle struct {
+	Radius float64
+}
+
+// Area method for Circle
+func (c *Circle) Area() float64 {
+	return 3.14 * c.Radius * c.Radius
+}
+
+// Rectangle type
+type Rectangle struct {
+	Length float64
+	Width  float64
+}
+
+// Area method for Rectangle
+func (r *Rectangle) Area() float64 {
+	return r.Length * r.Width
+}
+
+func main() {
+	// Create instances of Circle and Rectangle
+	circle := &Circle{Radius: 5}
+	rectangle := &Rectangle{Length: 4, Width: 6}
+
+	// Define a slice of Shape interface containing Circle and Rectangle instances
+	shapes := []Shape{circle, rectangle}
+
+	// Iterate over the shapes slice and display their areas
+	for i, shape := range shapes {
+		fmt.Printf("Shape %d: ", i+1)
+
+		// Use type assertion to determine the actual type of the shape and call its Area() method
+		switch s := shape.(type) {
+		case *Circle:
+			fmt.Printf("Circle with radius %.2f has area %.2f\n", s.Radius, s.Area())
+		case *Rectangle:
+			fmt.Printf("Rectangle with length %.2f and width %.2f has area %.2f\n", s.Length, s.Width, s.Area())
+		default:
+			fmt.Println("Unknown shape")
+		}
+	}
+}
+===========================================================
+
+Q.1(B)
+
+package main
+
+import (
+	"fmt"
+)
+
+// fibonacci sends the Fibonacci sequence to the given channel up to n terms
+func fibonacci(ch chan<- int, n int) {
+	a, b := 0, 1
+	for i := 0; i < n; i++ {
+		ch <- a
+		a, b = b, a+b
+	}
+	close(ch)
+}
+
+func main() {
+	// Create a channel to communicate Fibonacci sequence
+	ch := make(chan int)
+
+	// Start a goroutine to generate Fibonacci sequence and send it to the channel
+	go fibonacci(ch, 10) // Change 10 to the desired number of terms in Fibonacci sequence
+
+	// Read from the channel and print the Fibonacci sequence
+	for num := range ch {
+		fmt.Print(num, " ")
+	}
+	fmt.Println()
+}
+

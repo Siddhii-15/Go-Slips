@@ -1,0 +1,21 @@
+Q.1
+
+package main
+
+import "fmt"
+
+// Function to print the multiplication table of a given number
+func printMultiplicationTable(number, limit int) {
+	fmt.Printf("Multiplication table of %d:\n", number)
+	for i := 1; i <= limit; i++ {
+		result := number * i
+		fmt.Printf("%d * %d = %d\n", number, i, result)
+	}
+}
+
+func main() {
+	number := 5 // Change this to the number for which you want to print the multiplication table
+	limit := 10 // Change this to the limit of the table (e.g., up to which number you want to multiply)
+
+	printMultiplicationTable(number, limit)
+}

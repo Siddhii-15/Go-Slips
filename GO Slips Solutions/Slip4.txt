@@ -1,0 +1,51 @@
+Q.1
+A)
+
+package main
+import "fmt"
+func recursiveSumOfDigits(num int) int {
+	// Base case: if the number is less than 10, return the number itself
+	if num < 10 {
+		return num
+	}
+	// Recursive case: sum the last digit with the sum of digits of the remaining number
+	return num%10 + recursiveSumOfDigits(num/10)
+}
+func main() {
+	var number int
+	fmt.Println("Enter a number:")
+	fmt.Scanln(&number)
+	sum := recursiveSumOfDigits(number)
+	fmt.Printf("Recursive sum of digits of %d is %d\n", number, sum)
+}
+
+--------------------------------------------------------------------------------------------------------
+B)
+package main
+import  "fmt"
+func bubbleSort(arr []int) {
+    n := len(arr)
+    for i := 0; i < n-1; i++ {
+        for j := 0; j < n-i-1; j++ {
+            if arr[j] > arr[j+1] {
+                // Swap arr[j] and arr[j+1]
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+            }
+        }
+    }
+}
+func main() {
+    var size int
+    fmt.Println("Enter the size of the array:")
+    fmt.Scanln(&size)
+    arr := make([]int, size)
+    fmt.Println("Enter the elements of the array:")
+    for i := 0; i < size; i++ {
+        fmt.Printf("Element %d: ", i+1)
+        fmt.Scanln(&arr[i])
+    }
+    fmt.Println("Original array:", arr)
+    // Sorting the array
+    bubbleSort(arr)
+    fmt.Println("Sorted array in ascending order:", arr)
+}

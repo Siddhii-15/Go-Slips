@@ -1,0 +1,93 @@
+
+Q.1 (A)
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var choice int
+	var num1, num2, result int
+
+	fmt.Println("Choose an arithmetic operation:")
+	fmt.Println("1. Addition")
+	fmt.Println("2. Subtraction")
+	fmt.Println("3. Multiplication")
+	fmt.Println("4. Division")
+	fmt.Print("Enter your choice (1-4): ")
+	fmt.Scanln(&choice)
+
+	fmt.Print("Enter the first number: ")
+	fmt.Scanln(&num1)
+	fmt.Print("Enter the second number: ")
+	fmt.Scanln(&num2)
+
+	switch choice {
+	case 1:
+		result = num1 + num2
+		fmt.Printf("Addition: %d + %d = %d\n", num1, num2, result)
+	case 2:
+		result = num1 - num2
+		fmt.Printf("Subtraction: %d - %d = %d\n", num1, num2, result)
+	case 3:
+		result = num1 * num2
+		fmt.Printf("Multiplication: %d * %d = %d\n", num1, num2, result)
+	case 4:
+		if num2 == 0 {
+			fmt.Println("Cannot divide by zero")
+			return
+		}
+		result = num1 / num2
+		fmt.Printf("Division: %d / %d = %d\n", num1, num2, result)
+	default:
+		fmt.Println("Invalid choice")
+	}
+}
+
+-----------------------------------------------------------------------------------------------
+B)
+
+package main
+import  "fmt"
+type Student struct {
+    RollNo    int
+    Name      string
+    Marks     [3]float64
+    Total     float64
+    Average   float64
+}
+func main() {
+    var n int
+    fmt.Println("Enter the number of students:")
+    fmt.Scanln(&n)
+    students := make([]Student, n)
+    for i := 0; i < n; i++ {
+        fmt.Printf("\nEnter details for student %d:\n", i+1)
+        fmt.Println("Roll number:")
+        fmt.Scanln(&students[i].RollNo)
+        fmt.Println("Name:")
+        fmt.Scanln(&students[i].Name)
+        fmt.Println("Marks in three subjects:")
+        for j := 0; j < 3; j++ {
+            fmt.Printf("Mark %d: ", j+1)
+            fmt.Scanln(&students[i].Marks[j])
+        }
+        students[i].Total, students[i].Average = calculateTotalAndAverage(students[i].Marks)
+    }
+
+    fmt.Println("\nStudent details with total and average marks:")
+    for i, student := range students {
+        fmt.Printf("\nStudent %d\n", i+1)
+        fmt.Printf("Roll number: %d\n", student.RollNo)
+        fmt.Printf("Name: %s\n", student.Name)
+        fmt.Printf("Total marks: %.2f\n", student.Total)
+        fmt.Printf("Average marks: %.2f\n", student.Average)
+    }
+}
+func calculateTotalAndAverage(marks [3]float64) (float64, float64) {
+    total := marks[0] + marks[1] + marks[2]
+    average := total / 3.0
+    return total, average
+}
