@@ -1,0 +1,77 @@
+buzzer ON/OFF code:
+-------------------------------
+
+// Define buzzer pin
+const int buzzerPin = 8;
+
+// Define push button pin
+const int buttonPin = 2;
+
+// Variable to store button state
+int buttonState = 0;
+
+void setup() {
+  // Initialize buzzer pin as output
+  pinMode(buzzerPin, OUTPUT);
+  // Initialize push button pin as input
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {
+  // Read the state of the push button
+  buttonState = digitalRead(buttonPin);
+
+  // Check if the button is pressed (active LOW)
+  if (buttonState == LOW) {
+    // Turn on the buzzer
+    digitalWrite(buzzerPin, HIGH);
+  } else {
+    // Turn off the buzzer
+    digitalWrite(buzzerPin, LOW);
+  }
+}
+===================================================================================================
+
+Toogle two LED code:
+--------------------------------
+
+void setup() {
+  // Initialize digital pins 13 and 12 as output pins
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+}
+
+void loop() {
+  // Turn on LED connected to pin 13 and turn off LED connected to pin 12
+  digitalWrite(13, HIGH);
+  digitalWrite(12, LOW);
+  delay(1000); // Wait for 1 second
+
+  // Turn off LED connected to pin 13 and turn on LED connected to pin 12
+  digitalWrite(13, LOW);
+  digitalWrite(12, HIGH);
+  delay(1000); // Wait for 1 second
+}
+==================================================================================
+
+Blink LED code:
+
+// Define the LED pin
+const int ledPin = 13;
+
+void setup() {
+  // Initialize the LED pin as an output
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // Turn the LED on
+  digitalWrite(ledPin, HIGH);
+  // Wait for 1 second
+  delay(1000);
+  // Turn the LED off
+  digitalWrite(ledPin, LOW);
+  // Wait for 1 second
+  delay(1000);
+}
+===============================
